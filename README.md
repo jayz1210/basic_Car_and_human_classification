@@ -126,7 +126,7 @@ Let's now take a look at actually running a prediction using the model. This cod
 through the model, giving an indication of whether the object is a car or a human.
 ➢Output:
 
-As we got accuracy of 90% but it's on limited data if we try on a more complex sample and the model gives the wrong answer.
+*As we got accuracy of 90% but it's on limited data if we try on a more complex sample and the model gives the wrong answer.*
 
 ![image](https://user-images.githubusercontent.com/71150528/113412426-d96c4280-93d5-11eb-9787-7da3b316499d.png)
 ![image](https://user-images.githubusercontent.com/71150528/113412429-dc673300-93d5-11eb-87bf-56d686222a09.png)
