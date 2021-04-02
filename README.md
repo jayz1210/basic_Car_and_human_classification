@@ -23,7 +23,8 @@ There is a total number of 7000samples available, each image is colored and has 
 
 Model
 Adding  convolutional layers, and flatten the final result to feed into the densely connected layers.
-model = tf.keras.models.Sequential([
+
+    model = tf.keras.models.Sequential([
     # Note the input shape is the desired size of the image 64x64 with 3 bytes color
     # This is the first convolution
     tf.keras.layers.Conv2D(16, (3,3), activation='relu', input_shape=(64, 64, 3)),
