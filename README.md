@@ -1,4 +1,4 @@
-#Vehicle and Person Detection
+# Vehicle and Person Detection
 
 In my implementation, I used a Deep Learning approach to image recognition. Specifically, Convolutional Neural Networks (CNNs) to recognize images.
 However, the task at hand is not just to detect a vehicle’s presence, but rather to point to its location. It turns out CNNs are suitable for these type of problems as well. 
@@ -6,7 +6,7 @@ The main idea is that since there is a binary classification problem (vehicle/pe
 Having trained this type of a model, the input’s width and height dimensions can be expanded arbitrarily, transforming the output layer’s dimensions from 1x1 to a map with an aspect ratio approximately matching that of a new large input.
 
 
-##Data
+## Data
 
 Udacity equips students with the great resources for training the classifier. Vehicles and non-vehicles and computer generated HUMAN samples  have been used for training.
 The total number of vehicle’s images used for training, validation, and testing was about 7500
@@ -25,7 +25,7 @@ There is a total number of 7000samples available, each image is colored and has 
 
 
 
-##Model
+## Model
 
 Adding  convolutional layers, and flatten the final result to feed into the densely connected layers.
 
@@ -55,7 +55,7 @@ Adding  convolutional layers, and flatten the final result to feed into the dens
 
 
 
-##Model.summary
+## Model.summary
 
 A neural network is used as a deep-learning approach, to decide which image is a car and which is a HUMAN. The fully-convolutional network looks like this,which is shown by code :
     model.summary()
@@ -94,7 +94,7 @@ A neural network is used as a deep-learning approach, to decide which image is a
 
 
 
-##Training
+## Training
 
 Let's train for 15 epochs -- this may take a few minutes to run.Do note the values per epoch.
 The Loss and Accuracy are a great indication of progress of training. It's making a guess as to the classification of the training data, and then measuring it against the known label, calculating the result. Accuracy is the portion of correct guesses.
@@ -105,7 +105,7 @@ The Loss and Accuracy are a great indication of progress of training. It's makin
           verbose=1,validation_data = validation_generator,
           validation_steps=8)
 
-##Running the Model
+## Running the Model
 
 Let's now take a look at actually running a prediction using the model. This code will allow we to choose 1 or more files from file system, it will then upload them, and run them 
     import numpy as np
@@ -132,7 +132,7 @@ Let's now take a look at actually running a prediction using the model. This cod
     else:
       print(fn + " is a car")
 through the model, giving an indication of whether the object is a car or a human.
-##Output:
+# Output:
 
 *As we got accuracy of 90% but it's on limited data if we try on a more complex sample and the model gives the wrong answer.*
 
@@ -141,7 +141,7 @@ through the model, giving an indication of whether the object is a car or a huma
 
 
 
-###Visualizing Intermediate Representations
+### Visualizing Intermediate Representations
 To get a feel for what kind of features our convnet has learned, one fun thing to do is to visualize how an input gets transformed as it goes through the convnet.
 As we can see we go from the raw pixels of the images to increasingly abstract and compact representations. The representations downstream start highlighting what the network pays attention to, and they show fewer and fewer features being "activated"; most are set to zero. This is called "sparsity." Representation sparsity is a key feature of deep learning.
 These representations carry increasingly less information about the original pixels of the image, but increasingly refined information about the class of the image. we can think of a convnet (or a deep network in general) as an information distillation pipeline.
