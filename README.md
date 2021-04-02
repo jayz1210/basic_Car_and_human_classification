@@ -134,6 +134,8 @@ As we got accuracy of 90% but it's on limited data if we try on a more complex s
 To get a feel for what kind of features our convnet has learned, one fun thing to do is to visualize how an input gets transformed as it goes through the convnet.
 As we can see we go from the raw pixels of the images to increasingly abstract and compact representations. The representations downstream start highlighting what the network pays attention to, and they show fewer and fewer features being "activated"; most are set to zero. This is called "sparsity." Representation sparsity is a key feature of deep learning.
 These representations carry increasingly less information about the original pixels of the image, but increasingly refined information about the class of the image. we can think of a convnet (or a deep network in general) as an information distillation pipeline.
+![image](https://user-images.githubusercontent.com/71150528/113412449-f0129980-93d5-11eb-8901-45489fe1be02.png)
+
 
 
 
