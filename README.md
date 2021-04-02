@@ -1,16 +1,20 @@
-➢Vehicle and Person Detection
+➢#Vehicle and Person Detection
 
 In my implementation, I used a Deep Learning approach to image recognition. Specifically, Convolutional Neural Networks (CNNs) to recognize images.
 However, the task at hand is not just to detect a vehicle’s presence, but rather to point to its location. It turns out CNNs are suitable for these type of problems as well. 
 The main idea is that since there is a binary classification problem (vehicle/person), a model could be constructed in such a way that it would have an input size of a small training sample (e.g., 64x64) and a single-feature convolutional layer of 1x1 at the top, which output could be used as a probability value for classification.
 Having trained this type of a model, the input’s width and height dimensions can be expanded arbitrarily, transforming the output layer’s dimensions from 1x1 to a map with an aspect ratio approximately matching that of a new large input.
-➢Data
+
+
+➢##Data
 
 Udacity equips students with the great resources for training the classifier. Vehicles and non-vehicles and computer generated HUMAN samples  have been used for training.
 The total number of vehicle’s images used for training, validation, and testing was about 7500
 
 In the first step, the dataset is explored. It consists of images taken from the GTI vehicle image database, the KITTI vision benchmark suite, and examples extracted from the project video itself. There are two classes, cars and non-cars. The cars have a label of 1.0, whereas the non-cars/human have a label of 0.0
+
 There is a total number of 7000samples available, each image is colored and has a resolution of 64x64 pixels. The dataset is split into the training set (7000 samples) and validation set ( 1000+ samples). The distribution shows that the dataset is very balanced, which is important for training the neural network later. Otherwise, it would have a bias towards one of the two classes.\
+
 ![image](https://user-images.githubusercontent.com/71150528/113412410-cd808080-93d5-11eb-9397-4634a046b8b8.png)
 
               Samples of data set\
@@ -21,7 +25,8 @@ There is a total number of 7000samples available, each image is colored and has 
 
 
 
-Model
+##Model
+
 Adding  convolutional layers, and flatten the final result to feed into the densely connected layers.
 
     model = tf.keras.models.Sequential([
@@ -50,7 +55,8 @@ Adding  convolutional layers, and flatten the final result to feed into the dens
 
 
 
-➢Model.summary
+➢##Model.summary
+
 A neural network is used as a deep-learning approach, to decide which image is a car and which is a HUMAN. The fully-convolutional network looks like this,which is shown by code :
     model.summary()
 
@@ -88,7 +94,8 @@ A neural network is used as a deep-learning approach, to decide which image is a
 
 
 
-➢Training
+➢##Training
+
 Let's train for 15 epochs -- this may take a few minutes to run.Do note the values per epoch.
 The Loss and Accuracy are a great indication of progress of training. It's making a guess as to the classification of the training data, and then measuring it against the known label, calculating the result. Accuracy is the portion of correct guesses.
     history = model.fit(
@@ -98,7 +105,8 @@ The Loss and Accuracy are a great indication of progress of training. It's makin
           verbose=1,validation_data = validation_generator,
           validation_steps=8)
 
-➢Running the Model
+➢##Running the Model
+
 Let's now take a look at actually running a prediction using the model. This code will allow we to choose 1 or more files from file system, it will then upload them, and run them 
     import numpy as np
     from google.colab import files
@@ -124,7 +132,7 @@ Let's now take a look at actually running a prediction using the model. This cod
     else:
       print(fn + " is a car")
 through the model, giving an indication of whether the object is a car or a human.
-➢Output:
+➢##Output:
 
 *As we got accuracy of 90% but it's on limited data if we try on a more complex sample and the model gives the wrong answer.*
 
