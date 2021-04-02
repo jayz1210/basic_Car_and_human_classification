@@ -52,35 +52,35 @@ Adding  convolutional layers, and flatten the final result to feed into the dens
 
 ➢Model.summary
 A neural network is used as a deep-learning approach, to decide which image is a car and which is a HUMAN. The fully-convolutional network looks like this,which is shown by code :
-model.summary()
+    model.summary()
 
 
-Model: "sequential_1"
-_________________________________________________________________
-Layer (type)                 Output Shape              Param #   
-=================================================================
-conv2d_4 (Conv2D)            (None, 62, 62, 16)        448       
-_________________________________________________________________
-max_pooling2d_4 (MaxPooling2 (None, 31, 31, 16)        0         
-_________________________________________________________________
-conv2d_5 (Conv2D)            (None, 29, 29, 32)        4640      
-_________________________________________________________________
-max_pooling2d_5 (MaxPooling2 (None, 14, 14, 32)        0         
-_________________________________________________________________
-conv2d_6 (Conv2D)            (None, 12, 12, 64)        18496     
-_________________________________________________________________
-max_pooling2d_6 (MaxPooling2 (None, 6, 6, 64)          0         
-_________________________________________________________________
-flatten_1 (Flatten)          (None, 2304)              0         
-_________________________________________________________________
-dense_2 (Dense)              (None, 512)               1180160   
-_________________________________________________________________
-dense_3 (Dense)              (None, 1)                 513       
-=================================================================
-Total params: 1,204,257
-Trainable params: 1,204,257
-Non-trainable params: 0
-_________________________________________________________________
+    Model: "sequential_1"
+    _________________________________________________________________
+    Layer (type)                 Output Shape              Param #   
+    =================================================================
+    conv2d_4 (Conv2D)            (None, 62, 62, 16)        448       
+    _________________________________________________________________
+    max_pooling2d_4 (MaxPooling2 (None, 31, 31, 16)        0         
+    _________________________________________________________________
+    conv2d_5 (Conv2D)            (None, 29, 29, 32)        4640      
+    _________________________________________________________________
+    max_pooling2d_5 (MaxPooling2 (None, 14, 14, 32)        0         
+    _________________________________________________________________
+    conv2d_6 (Conv2D)            (None, 12, 12, 64)        18496     
+    _________________________________________________________________
+    max_pooling2d_6 (MaxPooling2 (None, 6, 6, 64)          0         
+    _________________________________________________________________
+    flatten_1 (Flatten)          (None, 2304)              0         
+    _________________________________________________________________
+    dense_2 (Dense)              (None, 512)               1180160   
+    _________________________________________________________________
+    dense_3 (Dense)              (None, 1)                 513       
+    =================================================================
+    Total params: 1,204,257
+    Trainable params: 1,204,257
+    Non-trainable params: 0
+    _________________________________________________________________
 
 
 
@@ -91,41 +91,43 @@ _________________________________________________________________
 ➢Training
 Let's train for 15 epochs -- this may take a few minutes to run.Do note the values per epoch.
 The Loss and Accuracy are a great indication of progress of training. It's making a guess as to the classification of the training data, and then measuring it against the known label, calculating the result. Accuracy is the portion of correct guesses.
-history = model.fit(
-      train_generator,
-      steps_per_epoch=8,  
-      epochs=15,
-      verbose=1,validation_data = validation_generator,
-      validation_steps=8)
+    history = model.fit(
+          train_generator,
+          steps_per_epoch=8,  
+          epochs=15,
+          verbose=1,validation_data = validation_generator,
+          validation_steps=8)
 
 ➢Running the Model
 Let's now take a look at actually running a prediction using the model. This code will allow we to choose 1 or more files from file system, it will then upload them, and run them 
-import numpy as np
-from google.colab import files
-from keras.preprocessing import image
-uploaded = files.upload()
-for fn in uploaded.keys():
- 
-  # predicting images
-  path = '/content/' + fn
-  img = image.load_img(path, target_size=(64, 64))
-  plt.axis('Off') # Don't show axes (or gridlines)
-  plt.subplot(2,3,2)
-  plt.imshow(img,cmap='gray')
-  plt.show()
-  x = image.img_to_array(img)
-  x = np.expand_dims(x, axis=0)
+    import numpy as np
+    from google.colab import files
+    from keras.preprocessing import image
+    uploaded = files.upload()
+    for fn in uploaded.keys():
 
-  images = np.vstack([x])
-  classes = model.predict(images, batch_size=10)
-  print(classes[0])
-  if classes[0]>0.5:
-    print(fn + " is a human")
-  else:
-    print(fn + " is a car")
+    # predicting images
+    path = '/content/' + fn
+    img = image.load_img(path, target_size=(64, 64))
+    plt.axis('Off') # Don't show axes (or gridlines)
+    plt.subplot(2,3,2)
+    plt.imshow(img,cmap='gray')
+    plt.show()
+    x = image.img_to_array(img)
+    x = np.expand_dims(x, axis=0)
+
+    images = np.vstack([x])
+    classes = model.predict(images, batch_size=10)
+    print(classes[0])
+    if classes[0]>0.5:
+      print(fn + " is a human")
+    else:
+      print(fn + " is a car")
 through the model, giving an indication of whether the object is a car or a human.
 ➢Output:
+
 As we got accuracy of 90% but it's on limited data if we try on a more complex sample and the model gives the wrong answer.
+
 ![image](https://user-images.githubusercontent.com/71150528/113412426-d96c4280-93d5-11eb-9787-7da3b316499d.png)
 ![image](https://user-images.githubusercontent.com/71150528/113412429-dc673300-93d5-11eb-87bf-56d686222a09.png)
 
